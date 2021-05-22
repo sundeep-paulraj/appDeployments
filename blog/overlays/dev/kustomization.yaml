@@ -1,3 +1,12 @@
 resources:
 - ../../base
-namePrefix: dev-
+
+namespace: service-a
+
+#patches:
+#- deployment.yaml
+#- service.yaml
+
+replicas:
+- name: blog
+  count: 3

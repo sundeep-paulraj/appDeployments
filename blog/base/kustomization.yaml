@@ -7,7 +7,6 @@ resources:
 - nameSpace.yaml
 - deployment.yaml
 - service.yaml
-- ingress.yaml
 
 #generators:
 #- ...
@@ -40,7 +39,7 @@ resources:
 
 replicas:
 - name: blog
-  count: 3
+  count: 1
 
 #secretGenerator:
 #- name: <SECRET_NAME>

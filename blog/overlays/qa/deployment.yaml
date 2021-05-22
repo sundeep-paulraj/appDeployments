@@ -6,6 +6,7 @@ metadata:
   name: blog
   namespace: default
 spec:
+  progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
@@ -21,6 +22,7 @@ spec:
       labels:
         app: blog
       annotations:
+        role: frontend-api
         prometheus.io/scrape: 'true'
         prometheus.io/path: '/actuator/prometheus'
         prometheus.io/port: '8080'        
@@ -32,6 +34,18 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 20
         resources:
           limits:
             cpu: 100m
@@ -39,22 +53,6 @@ spec:
           requests:
             cpu: 100m
             memory: 256Mi
-        livenessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health
-          initialDelaySeconds: 300
-          periodSeconds: 10
-          timeoutSeconds: 60
-          successThreshold: 1
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health
-          initialDelaySeconds: 300
-          periodSeconds: 10
-          timeoutSeconds: 60
-          successThreshold: 1
         volumeMounts:
           - mountPath: /usr/local/var/log
             name: app-log
