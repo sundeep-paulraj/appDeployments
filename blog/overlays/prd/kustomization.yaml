@@ -1,0 +1,13 @@
+resources:
+- ../../base
+
+#generators:
+#- ...
+
+#transformers:
+#- ...
+
+#validators:
+#- ...
+
+namePrefix: prd-
