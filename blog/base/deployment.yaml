@@ -39,22 +39,6 @@ spec:
           requests:
             cpu: 100m
             memory: 256Mi
-        livenessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health
-          initialDelaySeconds: 300
-          periodSeconds: 10
-          timeoutSeconds: 60
-          successThreshold: 1
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /actuator/health
-          initialDelaySeconds: 300
-          periodSeconds: 10
-          timeoutSeconds: 60
-          successThreshold: 1
         volumeMounts:
           - mountPath: /usr/local/var/log
             name: app-log
