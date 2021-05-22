@@ -3,9 +3,9 @@ resources:
 
 namespace: service-a
 
-#patches:
-#- deployment.yaml
-#- service.yaml
+patches:
+- deployment.yaml
+- service.yaml
 
 replicas:
 - name: blog
