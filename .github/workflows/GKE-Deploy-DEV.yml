@@ -50,9 +50,9 @@ jobs:
         chmod u+x ./kustomize
 
     # Deploy the Docker image to the GKE cluster
+    #kubectl rollout status deployment/blog
     - name: Deploy
       run: |-
         ./kustomize build blog/overlays/dev | kubectl apply -f -
-        kubectl rollout status deployment/blog
         kubectl get services -o wide
         kubectl get all --all-namespaces
