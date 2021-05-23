@@ -39,7 +39,7 @@ resources:
 
 replicas:
 - name: blog
-  count: 1
+  count: 3
 
 #secretGenerator:
 #- name: <SECRET_NAME>

@@ -6,7 +6,7 @@ metadata:
   name: blog
   namespace: default
 spec:
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -32,13 +32,33 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
+#        readinessProbe:
+#          httpGet:
+#            scheme: HTTP
+#            path: /actuator/health/readiness
+#            port: 8080
+#          initialDelaySeconds: 120
+#          timeoutSeconds: 3
+#          periodSeconds: 30
+#          successThreshold: 1
+#          failureThreshold: 5
+#        livenessProbe:
+#          httpGet:
+#            scheme: HTTP
+#            port: 8080
+#            path: /actuator/health/liveness
+#          initialDelaySeconds: 60
+#          timeoutSeconds: 3
+#          periodSeconds: 30
+#          successThreshold: 1
+#          failureThreshold: 5
         resources:
           limits:
-            cpu: 100m
-            memory: 256Mi
+            cpu: 200m
+            memory: 512Mi
           requests:
-            cpu: 100m
-            memory: 256Mi
+            cpu: 200m
+            memory: 512Mi
         volumeMounts:
           - mountPath: /usr/local/var/log
             name: app-log
